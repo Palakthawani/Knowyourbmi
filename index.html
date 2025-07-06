@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KNOW YOUR BMI, KNOW YOUR BODY</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="header">
+    <nav>
+      <ul>
+        <li><a href="#header">HOME</a></li>
+        <li><a href="#CALCULATOR">CALCULATOR</a></li>
+        <li><a href="#DIET">DIET</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-text">
+      <h1>KNOW YOUR BMI, KNOW YOUR BODY</h1>
+      <h2>LET US KNOW WHAT IS BMI AND HOW TO CALCULATE IT-</h2>
+      <p>
+        BMI refers to Body Mass Index. Body mass index (BMI) is a tool that healthcare providers use to
+        estimate the amount of body fat by using your height and weight measurements.
+        It is used to classify whether a person is underweight, normal weight, overweight or obese.
+        <br><br>
+        <strong>THE FORMULA TO CALCULATE BMI:</strong><br>
+        BMI = Weight(kg) / Height(m)<sup>2</sup>
+      </p>
+    </div>
+  </div>
+
+  <div id="CALCULATOR">
+    <div class="container">
+      <h1>BMI Calculator</h1>
+      <input type="number" id="weight" placeholder="Enter weight (kg)" />
+      <input type="number" id="height" placeholder="Enter height (m)" />
+      <button onclick="calculateBMI()">Calculate BMI</button>
+      <div id="result"></div>
+    </div>
+  </div>
+
+  <div id="DIET">
+    <h1>Check Diet by BMI Category</h1>
+    <div class="diet-buttons">
+      <button onclick="showSection('Underweight')">Underweight</button>
+      <button onclick="showSection('Normal')">Normal</button>
+      <button onclick="showSection('Overweight')">Overweight</button>
+      <button onclick="showSection('Obese')">Obese</button>
+      <button onclick="showSection('Highlights')">Highlights</button>
+    </div>
+  </div>
+
+  <div id="Underweight" class="diet-section">
+    <h2>UNDERWEIGHT (BMI &lt; 18.5)</h2>
+    <p>
+      Goal: Healthy weight gain — build muscle, not just fat.<br><br>
+      Breakfast: Peanut butter toast + banana + full cream milk<br>
+      Mid-morning snack: Dry fruits (almonds, dates, raisins)<br>
+      Lunch: Rice or roti + dal + sabzi + ghee + curd<br>
+      Evening snack: Smoothie or cheese sandwich<br>
+      Dinner: Paneer/chicken + roti + vegetables + sweet potato<br>
+      Before bed: Warm milk with honey<br>
+    </p>
+  </div>
+
+  <div id="Normal" class="diet-section">
+    <h2>NORMAL WEIGHT (BMI 18.5–24.9)</h2>
+    <p>
+      Goal: Maintain a balanced lifestyle.<br><br>
+      Breakfast: Oats with milk or poha<br>
+      Snack: Boiled egg or fruit<br>
+      Lunch: Roti + sabzi + dal + curd<br>
+      Evening: Buttermilk or roasted chana<br>
+      Dinner: Light sabzi + roti or soup<br>
+    </p>
+  </div>
+
+  <div id="Overweight" class="diet-section">
+    <h2>OVERWEIGHT (BMI 25–29.9)</h2>
+    <p>
+      Goal: Gentle, steady fat loss.<br><br>
+      Breakfast: Vegetable oats or eggs<br>
+      Snack: Green tea + fruit<br>
+      Lunch: Roti + dal + sabzi + salad<br>
+      Snack: Makhana or curd<br>
+      Dinner: Grilled paneer + veggies or soup<br>
+    </p>
+  </div>
+
+  <div id="Obese" class="diet-section">
+    <h2>OBESE (BMI 30+)</h2>
+    <p>
+      Goal: Improve blood sugar and fat loss.<br><br>
+      Breakfast: Eggs or tofu + spinach<br>
+      Snack: Carrot sticks or green tea<br>
+      Lunch: Salad + paneer/chicken<br>
+      Snack: Black coffee or apple<br>
+      Dinner: Clear soup + steamed veggies<br>
+    </p>
+  </div>
+
+  <div id="Highlights" class="diet-section">
+    <h2>HIGHLIGHTS</h2>
+    <p>
+      ✅ Drink 2–3 liters water daily<br>
+      ✅ Perform yoga and stay active<br>
+      ✅ Avoid sugar and soft drinks<br>
+    </p>
+  </div>
+
+  <div class="copyright">
+    ©Know Your BMI, Know Your Body
+  </div>
+
+  <script>
+    function calculateBMI() {
+      const weight = parseFloat(document.getElementById('weight').value);
+      const height = parseFloat(document.getElementById('height').value);
+      const result = document.getElementById('result');
+
+      if (!weight || !height || height === 0) {
+        result.innerText = "Please enter valid values.";
+        return;
+      }
+
+      const bmi = (weight / (height * height)).toFixed(2);
+      let category = '';
+
+      if (bmi < 18.5) category = 'Underweight';
+      else if (bmi < 25) category = 'Normal';
+      else if (bmi < 30) category = 'Overweight';
+      else category = 'Obese';
+
+      result.innerText = `Your BMI is ${bmi} (${category})`;
+      showSection(category);
+    }
+
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.diet-section');
+      sections.forEach(section => {
+        section.style.display = section.id === sectionId ? 'block' : 'none';
+      });
+    }
+
+    // Hide all on load
+    window.onload = () => showSection('');
+  </script>
+</body>
+</html>
